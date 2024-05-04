@@ -14,7 +14,7 @@ public class Editor {
 
     private Imagen pgm;
 
-    public Editor(String ruta) throws Exception {
+    public Editor(String ruta) throws Exception, FileLoadError {
         try {
             ImagenDAOImp idi = new ImagenDAOImp();
             pgm = idi.getImagenPGM(ruta);

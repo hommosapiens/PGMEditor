@@ -1,13 +1,15 @@
 package com.pgm.gui;
 
+import com.editor.pgm.exceptions.FileWriteError;
 import com.pgm.biz.Editor;
-import com.pgm.biz.pojo.Imagen;
-import java.awt.Image;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.JRootPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -42,26 +44,14 @@ public class ExecGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
-        jLabelImagen.setText(" ");
-        jLabelImagen.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jLabelImagenAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        jLabelImagen.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
-            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
-                jLabelImagenMouseWheelMoved(evt);
-            }
-        });
+        jLabelImagen.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
+        jLabelImagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelImagen.setText("Cargando...");
 
         jButtonRotIzq.setText("Girar izquierda");
         jButtonRotIzq.addActionListener(new java.awt.event.ActionListener() {
@@ -166,71 +156,15 @@ public class ExecGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabelImagenAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabelImagenAncestorAdded
-        // TODO add your handling code here:
-/*
-        // Create a 4x4 BufferedImage
-        int[][] datos = getPGM();
-        int width = datos.length;
-        int height = datos.length;
-        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-
-        // Set all pixels to red
-        int white = 0 << 16 | 0 << 8 | 0;// RGB value for red
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                white = datos[y][x] << 16 | datos[y][x] << 8 | datos[y][x];
-                image.setRGB(x, y, white);
-            }
-        }
-
-        // Save the image as a JPG file
-        File outputFile = new File("red_image.jpg");
-        try {
-            ImageIO.write(image, "jpg", outputFile);
-            System.out.println("Image saved successfully.");
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-
-        ImageIcon i = new ImageIcon(image);
-        System.out.println(i.getImage());
-        this.jLabel1.setIcon(i);
-
-         */
-    }//GEN-LAST:event_jLabelImagenAncestorAdded
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
-
-        try {
-            editor = new Editor("perro.pgm");
-            preview();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-
-    }//GEN-LAST:event_formWindowActivated
-
-    private void jLabelImagenMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jLabelImagenMouseWheelMoved
-        // TODO add your handling code here:
-        System.out.println("aaaaaa");
-    }//GEN-LAST:event_jLabelImagenMouseWheelMoved
-
     private void jButtonRotIzqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotIzqActionPerformed
         // TODO add your handling code here:
-
         editor.rotIzquierda();
-
         preview();
-
     }//GEN-LAST:event_jButtonRotIzqActionPerformed
 
     private void jButtonRotDerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotDerActionPerformed
         // TODO add your handling code here:
         editor.rotDerecha();
-
         preview();
     }//GEN-LAST:event_jButtonRotDerActionPerformed
 
@@ -260,11 +194,64 @@ public class ExecGUI extends javax.swing.JFrame {
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
+        GuardarJDialog gd = new GuardarJDialog(this, true);
+        gd.setVisible(true);
+
+        JRootPane rp = (JRootPane) gd.getComponent(0);
+        JLayeredPane lp = (JLayeredPane) rp.getComponent(1);
+        JPanel p = (JPanel) lp.getComponent(0);
+        JTextField tf = (JTextField) p.getComponent(1);
+
+        String nombre = tf.getText();
+
+        if (!nombre.endsWith(".pgm")) {
+            nombre += ".pgm";
+        }
+
+        try {
+            editor.toWrite(nombre);
+        } catch (FileWriteError e) {
+            ed.setErrorText(e);
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButtonSalirActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        //Centra el UI en la pantalla
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+
+        RutaJDialog rd = new RutaJDialog(this, true);
+
+        do {
+            rd.setVisible(true);
+
+            JRootPane rp = (JRootPane) rd.getComponent(0);
+            JLayeredPane lp = (JLayeredPane) rp.getComponent(1);
+            JPanel p = (JPanel) lp.getComponent(0);
+            JTextField tf = (JTextField) p.getComponent(1);
+
+            String ruta = tf.getText();
+
+            try {
+                editor = new Editor(ruta);
+                this.jLabelImagen.setText("");
+                preview();
+                ed.dispose();
+            } catch (Exception e) {
+                ed.setErrorText(e);
+                ed.setVisible(true);
+                e.printStackTrace();
+            }
+
+        } while (editor == null);
+    }//GEN-LAST:event_formWindowOpened
 
     private void preview() {
         int[][] datos = editor.toInt();
@@ -274,7 +261,7 @@ public class ExecGUI extends javax.swing.JFrame {
 
         BufferedImage image = new BufferedImage(nColumnas, nFilas, BufferedImage.TYPE_INT_RGB);
 
-        // Set all pixels to red
+        // Transformamos la escala de grises a rgb
         for (int f = 0; f < nFilas; f++) {
             for (int c = 0; c < nColumnas; c++) {
                 rgb = datos[f][c] << 16 | datos[f][c] << 8 | datos[f][c];
@@ -293,7 +280,7 @@ public class ExecGUI extends javax.swing.JFrame {
     private void calcTamañoVentana(int ancho, int altura) {
 
         if (altura < 525) {
-            this.setSize(ancho + 165, 525);
+            this.setSize(ancho + 165, 670);
 
         } else {
             this.setSize(ancho + 165, altura + 50);
@@ -339,7 +326,8 @@ public class ExecGUI extends javax.swing.JFrame {
     }
 
     private Editor editor = null;
-    private Imagen imagen = null;
+    ErrorJDialog ed = new ErrorJDialog(this, true);
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDesenfocar;

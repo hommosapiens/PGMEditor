@@ -1,6 +1,6 @@
 package com.pgm.biz.pojo;
 
-import com.editor.pgm.exceptions.FileLoadError;
+import com.pgm.exceptions.*;
 import java.io.File;
 import java.util.Scanner;
 
@@ -15,7 +15,7 @@ public class Imagen {
     private int nColumnas;
     private int blancoAbs;
 
-    public Imagen(File imageFile) throws FileLoadError {
+    public Imagen(File imageFile) throws NotPGMError, Exception {
         String[] pixels;
         String header1, header2;
         try (Scanner scFile = new Scanner(imageFile);) {
@@ -24,7 +24,7 @@ public class Imagen {
             header2 = scFile.nextLine();
 
             if (!header1.equals("P2") || header2.charAt(0) != '#') {
-                throw new FileLoadError("Error al cargar, verifique la integridad de la imagen.");
+                throw new NotPGMError();
             }
 
             //Obtenemos la informacion de la imagen
@@ -41,10 +41,8 @@ public class Imagen {
                 }
             }
         } catch (Exception e) {
-            throw new FileLoadError("Error al cargar, verifique la integridad de la imagen.");
+            throw e;
         }
-        System.out.println(this.nFilas + " : " + this.nColumnas);
-
     }
 
     public double[][] getDatos() {
