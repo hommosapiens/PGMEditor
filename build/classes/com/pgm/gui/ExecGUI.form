@@ -33,13 +33,13 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jButtonRotDer" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jButtonFlipHor" alignment="0" pref="125" max="32767" attributes="0"/>
-                  <Component id="jButtonFlipVer" alignment="0" pref="125" max="32767" attributes="0"/>
-                  <Component id="jButtonNegativo" alignment="0" pref="125" max="32767" attributes="0"/>
-                  <Component id="jButtonDesenfocar" alignment="0" pref="125" max="32767" attributes="0"/>
+                  <Component id="jButtonFlipHor" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jButtonFlipVer" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jButtonNegativo" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jButtonDesenfocar" alignment="0" max="32767" attributes="0"/>
                   <Component id="jButtonRotIzq" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jButtonGuardar" alignment="0" pref="125" max="32767" attributes="0"/>
-                  <Component id="jButtonSalir" alignment="0" pref="125" max="32767" attributes="0"/>
+                  <Component id="jButtonGuardar" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jButtonSalir" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabelImagen" pref="527" max="32767" attributes="0"/>

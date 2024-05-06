@@ -2,7 +2,6 @@ package com.pgm.gui;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.File;
 
 /**
  *
@@ -87,19 +86,6 @@ public class GuardarJDialog extends javax.swing.JDialog {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
     }//GEN-LAST:event_formWindowOpened
-
-    private boolean checkRuta() {
-        File image;
-
-        image = new File(this.jTextFieldRuta.getText());
-
-        if (!image.exists()) {
-            return false;
-        } else {
-            return true;
-        }
-
-    }
 
     /**
      * @param args the command line arguments

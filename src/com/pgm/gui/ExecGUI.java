@@ -247,7 +247,6 @@ public class ExecGUI extends javax.swing.JFrame {
             } catch (Exception e) {
                 ed.setErrorText(e);
                 ed.setVisible(true);
-                e.printStackTrace();
             }
 
         } while (editor == null);
