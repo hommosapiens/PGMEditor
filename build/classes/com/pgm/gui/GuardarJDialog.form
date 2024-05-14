@@ -28,11 +28,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabelTitulo" max="-2" attributes="0"/>
+              <Component id="TitulojLabel" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTextFieldRuta" pref="532" max="32767" attributes="0"/>
+              <Component id="RutajTextField" pref="532" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" pref="100" max="-2" attributes="0"/>
+              <Component id="AceptarjButton" min="-2" pref="100" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -42,9 +42,9 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jTextFieldRuta" pref="60" max="32767" attributes="0"/>
-                  <Component id="jButton1" alignment="1" max="32767" attributes="0"/>
-                  <Component id="jLabelTitulo" alignment="0" max="32767" attributes="0"/>
+                  <Component id="RutajTextField" pref="60" max="32767" attributes="0"/>
+                  <Component id="AceptarjButton" alignment="1" max="32767" attributes="0"/>
+                  <Component id="TitulojLabel" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -52,15 +52,15 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="AceptarjButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Aceptar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AceptarjButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelTitulo">
+    <Component class="javax.swing.JLabel" name="TitulojLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="24" style="0"/>
@@ -69,7 +69,7 @@
         <Property name="text" type="java.lang.String" value="Nombre del archivo: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldRuta">
+    <Component class="javax.swing.JTextField" name="RutajTextField">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="24" style="0"/>

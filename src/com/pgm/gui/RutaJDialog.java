@@ -1,9 +1,7 @@
 package com.pgm.gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.File;
 
 /**
  *
@@ -17,6 +15,7 @@ public class RutaJDialog extends javax.swing.JDialog {
     public RutaJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        interfaz = (ExecGUI) this.getParent();
     }
 
     /**
@@ -68,7 +67,6 @@ public class RutaJDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-        
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -76,28 +74,17 @@ public class RutaJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosing
 
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
-        // TODO add your handling code here:
-        System.out.println(evt.getActionCommand());
+        // TODO add your handling code here:        
         if (evt.getActionCommand().equals("ApproveSelection")) {
-            File image = new File(this.jFileChooser1.getSelectedFile().getAbsolutePath());
-            System.out.println(image);
-        }else if (evt.getActionCommand().equals("CancelSelection")) {
+            interfaz.cargarEditor(this.jFileChooser1.getSelectedFile().getAbsolutePath());
+            this.dispose();
+        } else if (evt.getActionCommand().equals("CancelSelection")) {
             this.dispose();
         }
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 
-    /*private boolean checkRuta() {
-        File imagen;
+    private ExecGUI interfaz;
 
-        imagen = new File(this.jTextFieldRuta.getText());
-
-        if (!imagen.exists()) {
-            return false;
-        } else {
-            return true;
-        }
-
-    }*/
     /**
      * @param args the command line arguments
      */
