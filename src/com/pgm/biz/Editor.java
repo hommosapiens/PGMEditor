@@ -1,9 +1,8 @@
 package com.pgm.biz;
 
 import com.editor.pgm.exceptions.FileWriteError;
-import com.pgm.biz.pojo.Imagen;
+import com.pgm.biz.pojo.ImagenPGM;
 import com.pgm.dao.implementations.ImagenDAOImp;
-import com.pgm.exceptions.FileLoadError;
 import java.io.FileWriter;
 
 /**
@@ -12,16 +11,12 @@ import java.io.FileWriter;
  */
 public class Editor {
 
-    private Imagen pgm;
+    private ImagenPGM pgm;
 
-    public Editor(String ruta) throws Exception, FileLoadError {
+    public Editor(String ruta) throws Exception {
         try {
             ImagenDAOImp idi = new ImagenDAOImp();
             pgm = idi.getImagenPGM(ruta);
-
-            if (pgm == null) {
-                throw new FileLoadError();
-            }
 
         } catch (Exception e) {
             throw e;
@@ -135,7 +130,7 @@ public class Editor {
 
             for (int f = 0; f < pgm.getnFilas(); f++) {
                 for (int c = 0; c < pgm.getnColumnas(); c++) {
-                    fw.write(Math.round((int) pgm.getDatos()[f][c]) + "\n");
+                    fw.write((int) Math.round(pgm.getDatos()[f][c]) + "\n");
                 }
             }
 
@@ -144,7 +139,7 @@ public class Editor {
         }
     }
 
-    public int[][] toInt() {
+    public int[][] toRGB() {
 
         if (pgm.getBlancoAbs() != 255) {
             normalize();
@@ -154,13 +149,13 @@ public class Editor {
 
         for (int f = 0; f < pgm.getnFilas(); f++) {
             for (int c = 0; c < pgm.getnColumnas(); c++) {
-                salida[f][c] = Math.round((int) pgm.getDatos()[f][c]);
+                salida[f][c] = (int) Math.round(pgm.getDatos()[f][c]);
             }
         }
         return salida;
     }
 
-    public Imagen getPgm() {
+    public ImagenPGM getPgm() {
         return pgm;
     }
 

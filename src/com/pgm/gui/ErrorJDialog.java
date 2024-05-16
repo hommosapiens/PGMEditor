@@ -62,16 +62,8 @@ public class ErrorJDialog extends javax.swing.JDialog {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
     }//GEN-LAST:event_formWindowOpened
-    public void setErrorText(Exception e) {
-        if (e.getClass().getSimpleName().equals("InputMismatchException") || e.getClass().getSimpleName().equals("NumberFormatException")) {
-            this.jLabelTitulo.setText("Error, el formato de la imagen no es correcto.");
-        } else if (e.getClass().getSimpleName().equals("NotValidFormatError")) {
-            this.jLabelTitulo.setText("Error, la imagen no es pgm.");
-        } else if (e.getClass().getSimpleName().equals("FileLoadError")) {
-            this.jLabelTitulo.setText("Error, no se pudo cargar la imagen.");
-        } else if (e.getClass().getSimpleName().equals("FileWriteError")) {
-            this.jLabelTitulo.setText("Ocurrió un error inesperado al guardar la imagen.");
-        }
+    public void setErrorText(String error) {
+            this.jLabelTitulo.setText(error);
     }
 
     /**

@@ -1,6 +1,6 @@
 package com.pgm.dao.implementations;
 
-import com.pgm.biz.pojo.Imagen;
+import com.pgm.biz.pojo.ImagenPGM;
 import com.pgm.dao.interfaces.ImagenDAO;
 import java.io.File;
 
@@ -11,12 +11,15 @@ import java.io.File;
 public class ImagenDAOImp implements ImagenDAO {
 
     @Override
-    public Imagen getImagenPGM(String ruta) throws Exception {
+    public ImagenPGM getImagenPGM(String ruta) throws Exception {
         File f = new File(ruta);
 
-        Imagen imagen = new Imagen(f);
-
-        return imagen;
+        try {
+            ImagenPGM imagen = new ImagenPGM(f);
+            return imagen;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 }

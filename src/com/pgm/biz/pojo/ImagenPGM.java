@@ -8,14 +8,14 @@ import java.util.Scanner;
  *
  * @author Juan Pedro
  */
-public class Imagen {
+public class ImagenPGM {
 
     private double[][] datos;
     private int nFilas;
     private int nColumnas;
     private int blancoAbs;
 
-    public Imagen(File imageFile) throws NotPGMError, Exception {
+    public ImagenPGM(File imageFile) throws NotPGMError, Exception {
         String[] pixels;
         String header1, header2;
         try (Scanner scFile = new Scanner(imageFile);) {

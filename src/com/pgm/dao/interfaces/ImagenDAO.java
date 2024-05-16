@@ -1,6 +1,6 @@
 package com.pgm.dao.interfaces;
 
-import com.pgm.biz.pojo.Imagen;
+import com.pgm.biz.pojo.ImagenPGM;
 
 /**
  *
@@ -8,6 +8,6 @@ import com.pgm.biz.pojo.Imagen;
  */
 public interface ImagenDAO {
 
-    public Imagen getImagenPGM(String ruta) throws Exception;
+    public ImagenPGM getImagenPGM(String ruta) throws Exception;
 
 }
