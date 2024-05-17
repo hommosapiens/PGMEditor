@@ -1,6 +1,6 @@
 package com.pgm.gui;
 
-import com.editor.pgm.exceptions.FileWriteError;
+import com.pgm.exceptions.FileWriteError;
 import com.pgm.biz.Editor;
 import com.pgm.exceptions.*;
 import java.awt.Dimension;
@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -167,7 +168,10 @@ public class ExecGUI extends javax.swing.JFrame {
         if (editor != null) {
             editor.rotIzquierda();
             preview();
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero debe cargar una imagen PGM.");
         }
+
     }//GEN-LAST:event_jButtonRotIzqActionPerformed
 
     private void jButtonRotDerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotDerActionPerformed
@@ -175,6 +179,8 @@ public class ExecGUI extends javax.swing.JFrame {
         if (editor != null) {
             editor.rotDerecha();
             preview();
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero debe cargar una imagen PGM.");
         }
     }//GEN-LAST:event_jButtonRotDerActionPerformed
 
@@ -183,6 +189,8 @@ public class ExecGUI extends javax.swing.JFrame {
         if (editor != null) {
             editor.flipHorizontal();
             preview();
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero debe cargar una imagen PGM.");
         }
     }//GEN-LAST:event_jButtonFlipHorActionPerformed
 
@@ -191,6 +199,8 @@ public class ExecGUI extends javax.swing.JFrame {
         if (editor != null) {
             editor.flipVertital();
             preview();
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero debe cargar una imagen PGM.");
         }
     }//GEN-LAST:event_jButtonFlipVerActionPerformed
 
@@ -199,6 +209,8 @@ public class ExecGUI extends javax.swing.JFrame {
         if (editor != null) {
             editor.negativo();
             preview();
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero debe cargar una imagen PGM.");
         }
     }//GEN-LAST:event_jButtonNegativoActionPerformed
 
@@ -207,6 +219,8 @@ public class ExecGUI extends javax.swing.JFrame {
         if (editor != null) {
             editor.desenfocar();
             preview();
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero debe cargar una imagen PGM.");
         }
     }//GEN-LAST:event_jButtonDesenfocarActionPerformed
 
@@ -239,8 +253,10 @@ public class ExecGUI extends javax.swing.JFrame {
             try {
                 editor.toWrite(nombreFoto);
             } catch (FileWriteError e) {
-                showError("Error de guardado: El programa no pudo guardar el archivo.");
+                JOptionPane.showMessageDialog(null, "Error de guardado: El programa no pudo guardar el archivo.");
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero debe cargar una imagen PGM.");
         }
     }//GEN-LAST:event_GuardarjMenuItemActionPerformed
 
@@ -251,15 +267,15 @@ public class ExecGUI extends javax.swing.JFrame {
             preview();
 
         } catch (NotPGMError e) {
-            showError("Error de apertura: El archivo seleccionado no es PGM o está mal formado.");
+            JOptionPane.showMessageDialog(null, "Error de apertura: El archivo seleccionado no es PGM o está mal formado.");
         } catch (NumberFormatException e) {
-            showError("Error de lectura: El programa esperaba un numero, revise su composición.");
+            JOptionPane.showMessageDialog(null, "Error de lectura: El programa esperaba un numero, revise su composición.");
         } catch (InputMismatchException e) {
-            showError("Error de carga: El programa esperaba un numero, revise los datos.");
+            JOptionPane.showMessageDialog(null, "Error de carga: El programa esperaba un numero, revise los datos.");
         } catch (NoSuchElementException e) {
-            showError("Error de carga: El programa no obtuvo suficientes datos, compruebe el archivo.");
+            JOptionPane.showMessageDialog(null, "Error de carga: El programa no obtuvo suficientes datos, compruebe el archivo.");
         } catch (Exception e) {
-            showError("Ocurrió un error inesperado, contacte con un administrador.");
+            JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado, contacte con un administrador.");
         }
     }
 
@@ -297,12 +313,6 @@ public class ExecGUI extends javax.swing.JFrame {
 
     public void setNombreFoto(String nombreFoto) {
         this.nombreFoto = nombreFoto;
-    }
-
-    private void showError(String mensaje) {
-        ErrorJDialog ventanaError = new ErrorJDialog(this, true);
-        ventanaError.setErrorText(mensaje);
-        ventanaError.setVisible(true);
     }
 
     /**

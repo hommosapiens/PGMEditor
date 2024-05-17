@@ -1,6 +1,6 @@
 package com.pgm.biz;
 
-import com.editor.pgm.exceptions.FileWriteError;
+import com.pgm.exceptions.FileWriteError;
 import com.pgm.biz.pojo.ImagenPGM;
 import com.pgm.dao.implementations.ImagenDAOImp;
 import java.io.FileWriter;
@@ -135,7 +135,7 @@ public class Editor {
             }
 
         } catch (Exception e) {
-            throw new FileWriteError("Error al guardar la imagen");
+            throw new FileWriteError();
         }
     }
 
